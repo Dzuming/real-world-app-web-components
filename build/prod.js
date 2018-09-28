@@ -10,17 +10,6 @@ const base = require('./base')
 base.output.publicPath = './'
 
 const prod = {
-  module: {
-    loaders: [
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader'
-        })
-      },
-    ]
-  },
   plugins: [
     new ExtractTextPlugin("styles.[hash:7].css"),
     new OptimizeCSSPlugin(),

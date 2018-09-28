@@ -15,6 +15,6 @@ export class Card extends HTMLElement {
   }
 
   render({ cards }) {
-    return cards.map(card => `<div>${card.name}</div>`).join(' ');
+    return cards.map(card => `<card-item card-name='${card.name}'></card-item>`).join(' ');
   }
 }

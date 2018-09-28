@@ -12,14 +12,6 @@ const dev = {
     port: 8080,
     historyApiFallback: true
   },
-  module: {
-    loaders: [
-      {
-        test: /\.css$/,
-        loaders: [ 'style-loader', 'css-loader' ],
-      },
-    ]
-  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
