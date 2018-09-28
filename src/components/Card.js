@@ -1,3 +1,7 @@
+//TODO: Show all cards
+
+import {getAllCards} from "../services/cards";
+
 export class Card extends HTMLElement {
     constructor() {
         super();
@@ -7,8 +11,10 @@ export class Card extends HTMLElement {
         return [];
     }
 
-    connectedCallback() {
-        this.innerHTML = this.render()
+    async connectedCallback() {
+        const cards = await getAllCards();
+        console.log(cards);
+        this.innerHTML = this.render();
     }
 
     render() {
