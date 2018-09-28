@@ -11,10 +11,24 @@ export class Card extends HTMLElement {
 
   async connectedCallback() {
     const { cards } = await getAllCards();
-    this.innerHTML = this.render({ cards });
+    const shadow = this.attachShadow({ mode: "open" });
+    let style = document.createElement("style");
+    shadow.innerHTML = this.render({ cards });
+    style.textContent = this.style();
+    shadow.appendChild(style);
   }
 
   render({ cards }) {
-    return cards.map(card => `<card-item card-name='${card.name}'></card-item>`).join(' ');
+    return cards
+      .map(card => `<card-item card-name='${card.name}'></card-item>`)
+      .join(" ");
+  }
+
+  style() {
+    return `
+    card-item {
+        color: red
+    }
+    `;
   }
 }

@@ -1,5 +1,4 @@
 const path = require("path");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const { SRC_PATH, DIST_PATH } = require("./utils");
 
 module.exports = {
@@ -31,21 +30,9 @@ module.exports = {
         query: {
           limit: 1024,
           name: "img/[hash:7].[ext]",
-          plugins: [
-            "transform-decorators-legacy",
-          ]
+          plugins: ["transform-decorators-legacy"]
         }
-      },
-        {
-            test: /\.(s*)css$/,
-            use: ['style-loader', 'css-loader', 'sass-loader']
-        }
+      }
     ]
-  },
-  plugins: [
-    // Specify output file name and path
-    new ExtractTextPlugin({
-      filename: "bundle.css"
-    })
-  ]
+  }
 };
