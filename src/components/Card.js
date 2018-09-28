@@ -1,5 +1,3 @@
-//TODO: Show all cards
-
 import { getAllCards } from "../services/cards";
 
 export class Card extends HTMLElement {
@@ -12,14 +10,11 @@ export class Card extends HTMLElement {
   }
 
   async connectedCallback() {
-    const cards = await getAllCards();
-    console.log(cards);
-    this.innerHTML = this.render();
+    const { cards } = await getAllCards();
+    this.innerHTML = this.render({ cards });
   }
 
-  render() {
-    return `
-        <div>It works</div>
-`;
+  render({ cards }) {
+    return cards.map(card => `<div>${card.name}</div>`).join(' ');
   }
 }
