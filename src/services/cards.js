@@ -1,3 +1,4 @@
-const API_URL = 'https://api.magicthegathering.io/v1';
+const API_URL = "https://api.magicthegathering.io/v1";
 
-export const getAllCards = () => fetch(`${API_URL}/cards`).then(response => response.json());
+export const getAllCards = () =>
+  fetch(`${API_URL}/cards`).then(response => response.json());
