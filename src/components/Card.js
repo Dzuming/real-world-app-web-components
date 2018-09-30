@@ -1,4 +1,5 @@
 import { getAllCards } from "../services/cards";
+import { cardBackground } from "../const/colors";
 
 export class Card extends HTMLElement {
   constructor() {
@@ -27,7 +28,13 @@ export class Card extends HTMLElement {
   style() {
     return `
     card-item {
-        color: red
+        width: 225px;
+        height: 275px;
+        background-color: ${cardBackground};
+        display: block;
+        margin: 10px;
+        border: 10px solid black;
+        border-radius: 10px;
     }
     `;
   }

@@ -1,3 +1,7 @@
+//TODO Add card style according to mtg card
+//TODO Add grid list
+//TODO Add logic to search specific card
+
 export class CardItem extends HTMLElement {
   constructor() {
     super();
