@@ -20,21 +20,27 @@ export class Card extends HTMLElement {
   }
 
   render({ cards }) {
-    return cards
-      .map(card => `<card-item card-name='${card.name}'></card-item>`)
-      .join(" ");
+    console.log(cards)
+    return `<div class="card">
+        ${cards
+          .map(card => `<card-item card-name="${card.name}" card-image="${card.imageUrl}"></card-item>`)
+          .join(" ")};
+</div>`;
   }
 
   style() {
     return `
+    .card {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr [col-start]);
+      justify-items: center;
+      width: 100%;
+    }
+    
     card-item {
-        width: 225px;
-        height: 275px;
-        background-color: ${cardBackground};
-        display: block;
-        margin: 10px;
-        border: 10px solid black;
-        border-radius: 10px;
+      margin: 10px;
+      width: 120px
+      height: auto
     }
     `;
   }

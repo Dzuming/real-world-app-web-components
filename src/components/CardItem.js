@@ -1,21 +1,21 @@
-//TODO Add card style according to mtg card
-//TODO Add grid list
+//TODO Add api call on scroll
+//TODO Add card zooming on click
 //TODO Add logic to search specific card
 
 export class CardItem extends HTMLElement {
   constructor() {
     super();
-    this.cardName = null;
+    this.cardImage = null;
   }
 
   static get observedAttributes() {
-    return ["card-name"];
+    return ["card-name", "card-image"];
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
     switch (name) {
-      case "card-name":
-        this.cardName = newValue;
+      case "card-image":
+        this.cardImage = newValue;
     }
   }
 
@@ -24,6 +24,9 @@ export class CardItem extends HTMLElement {
   }
 
   render() {
-    return `<div>${this.cardName}</div>`;
+    console.log(this.cardImage);
+    return `
+        <img src="${this.cardImage}"/>
+    `;
   }
 }
