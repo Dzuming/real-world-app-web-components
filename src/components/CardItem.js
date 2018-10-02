@@ -12,6 +12,10 @@ export class CardItem extends HTMLElement {
     return ["card-name", "card-image"];
   }
 
+  attributeChangedCallback() {
+    console.log('works')
+  }
+
   attributeChangedCallback(name, oldValue, newValue) {
     switch (name) {
       case "card-image":
