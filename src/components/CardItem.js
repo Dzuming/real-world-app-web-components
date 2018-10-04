@@ -3,6 +3,9 @@
 //TODO Add general function to load style
 //TODO Add general function to load custom elements
 
+import { styleLoader } from "../library/loaders";
+import { style } from "./CardItem.style";
+
 export class CardItem extends HTMLElement {
   constructor() {
     super();
@@ -28,10 +31,8 @@ export class CardItem extends HTMLElement {
   async connectedCallback() {
     this.shadow = this.attachShadow({ mode: "open" });
     this.shadow.innerHTML = this.render();
-    let style = document.createElement("style");
-    style.textContent = this.style();
-    this.shadow.appendChild(style);
-    this.renderImage()
+    styleLoader(this.shadow, style);
+    this.renderImage();
   }
 
   renderImage() {
@@ -50,28 +51,6 @@ export class CardItem extends HTMLElement {
                 <div class="loader" id="${this.cardId}-loader"></div>
         </div>
         <img id="${this.cardId}"  src="${this.cardImage}"/>
-    `;
-  }
-
-  style() {
-    return `
-      .loader {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        border: 3px solid #39132E;
-        border-radius: 50%;
-        border-top-color: #fff;
-        animation: spin 1s ease-in-out infinite;
-        -webkit-animation: spin 1s ease-in-out infinite;
-      }
-    
-      @keyframes spin {
-        to { -webkit-transform: rotate(360deg); }
-      }  
-      @-webkit-keyframes spin {
-        to { -webkit-transform: rotate(360deg); }
-      }
     `;
   }
 }

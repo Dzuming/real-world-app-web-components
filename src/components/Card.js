@@ -1,4 +1,6 @@
 import { getAllCards } from "../services/cards";
+import { styleLoader } from "../library/loaders";
+import { style } from "./Card.style";
 
 export class Card extends HTMLElement {
   constructor() {
@@ -13,10 +15,8 @@ export class Card extends HTMLElement {
   async connectedCallback() {
     const cards = await this.fetchCards({ page: this.page });
     const shadow = this.attachShadow({ mode: "open" });
-    let style = document.createElement("style");
     shadow.innerHTML = this.render({ cards });
-    style.textContent = this.style();
-    shadow.appendChild(style);
+    styleLoader(shadow, style)
     const cardsContainer = shadow.querySelector("#cards-container");
     shadow
       .querySelector("#js-fetch-more")
@@ -57,31 +57,5 @@ export class Card extends HTMLElement {
         <button id="js-fetch-more" class="fetch-more">Show more</button>
     </div>
 `;
-  }
-
-  style() {
-    return `
-    .card {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr [col-start]);
-      justify-items: center;
-      width: 100%;
-    }
-    
-    card-item {
-      margin: 10px;
-      width: 120px
-      height: auto
-    }
-    
-    .fetch-more-container {
-      display: flex;
-      justify-content: center;
-    }
-    .fetch-more {
-      width: 120px;
-      height: 40px;
-    }
-    `;
   }
 }
