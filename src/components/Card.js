@@ -18,35 +18,36 @@ export class Card extends HTMLElement {
     style.textContent = this.style();
     shadow.appendChild(style);
     const cardsContainer = shadow.querySelector("#cards-container");
-    shadow.querySelector("#js-fetch-more").addEventListener("click", async () => {
-      this.page++;
-      const cards = await this.fetchCards({ page: this.page });
-      //Use a template
+    shadow
+      .querySelector("#js-fetch-more")
+      .addEventListener("click", async () => {
+        this.page++;
+        const cards = await this.fetchCards({ page: this.page });
+        //Use a template
 
-      cards.map(card => {
-        var template = document.createElement("template");
-        template.innerHTML = `<card-item card-name="${card.name}" card-image="${
-          card.imageUrl
-        }"></card-item>`;
+        cards.map(card => {
+          var template = document.createElement("template");
+          template.innerHTML = `<card-item card-id="${
+            card.id
+          }" card-image="${card.imageUrl}"></card-item>`;
 
-        //Get the document fragment
-        var fragment = template.content;
-        cardsContainer.appendChild(fragment);
+          //Get the document fragment
+          var fragment = template.content;
+          cardsContainer.appendChild(fragment);
+        });
       });
-    });
   }
 
   async fetchCards({ page }) {
     const { cards } = await getAllCards({ page, pageSize: 8 });
     return cards;
   }
-
   render({ cards }) {
     return `<div id="cards-container" class="card">
         ${cards
           .map(
             card =>
-              `<card-item card-name="${card.name}" card-image="${
+              `<card-item card-id="${card.id}" card-image="${
                 card.imageUrl
               }"></card-item>`
           )
