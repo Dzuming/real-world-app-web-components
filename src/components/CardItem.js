@@ -41,7 +41,6 @@ export class CardItem extends HTMLElement {
     card.onload = function() {
       loader.style.display = "none";
       card.style.display = "block";
-      this.shadow.append(this);
     };
   }
 
