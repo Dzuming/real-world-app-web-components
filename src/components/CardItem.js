@@ -1,7 +1,6 @@
 //TODO Add card zooming on click
 //TODO Add logic to search specific card
-//TODO Add general function to load style
-//TODO Add general function to load custom elements
+//TODO Fix performance issue
 
 import { styleLoader } from "../library/loaders";
 import { style } from "./CardItem.style";
@@ -41,7 +40,7 @@ export class CardItem extends HTMLElement {
     card.style.display = "none";
     card.onload = function() {
       loader.style.display = "none";
-      card.style.display = "block";
+      card.style.display = "inline";
     };
   }
 

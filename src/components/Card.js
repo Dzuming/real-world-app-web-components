@@ -6,6 +6,7 @@ export class Card extends HTMLElement {
   constructor() {
     super();
     this.page = 1;
+    this.shadow = null;
   }
 
   static get observedAttributes() {
@@ -14,28 +15,31 @@ export class Card extends HTMLElement {
 
   async connectedCallback() {
     const cards = await this.fetchCards({ page: this.page });
-    const shadow = this.attachShadow({ mode: "open" });
-    shadow.innerHTML = this.render({ cards });
-    styleLoader(shadow, style)
-    const cardsContainer = shadow.querySelector("#cards-container");
-    shadow
-      .querySelector("#js-fetch-more")
-      .addEventListener("click", async () => {
-        this.page++;
-        const cards = await this.fetchCards({ page: this.page });
-        //Use a template
+    this.shadow = this.attachShadow({ mode: "open" });
+    this.shadow.innerHTML = this.render({ cards });
+    styleLoader(this.shadow, style);
+    this.handleMoreButtonClick();
+  }
 
-        cards.map(card => {
-          var template = document.createElement("template");
-          template.innerHTML = `<card-item card-id="${
-            card.id
-          }" card-image="${card.imageUrl}"></card-item>`;
+  handleMoreButtonClick() {
+    const cardsContainer = this.shadow.querySelector("#cards-container");
+    const moreButton = this.shadow.querySelector("#js-fetch-more");
+    moreButton.addEventListener("click", async () => {
+      await this.handleRenderNextCards(cardsContainer);
+    });
+  }
+  async handleRenderNextCards(cardsContainer) {
+    this.page++;
+    const cards = await this.fetchCards({ page: this.page });
 
-          //Get the document fragment
-          var fragment = template.content;
-          cardsContainer.appendChild(fragment);
-        });
-      });
+    cards.map(card => {
+      let template = document.createElement("template");
+      template.innerHTML = `<card-item card-id="${card.id}" card-image="${
+        card.imageUrl
+      }"></card-item>`;
+      let fragment = template.content;
+      cardsContainer.appendChild(fragment);
+    });
   }
 
   async fetchCards({ page }) {
