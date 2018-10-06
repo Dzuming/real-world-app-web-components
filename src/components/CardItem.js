@@ -1,6 +1,6 @@
 //TODO Add card zooming on click
 //TODO Add logic to search specific card
-//TODO Fix performance issue
+//TODO Add pub/sub pattern
 
 import { styleLoader } from "../library/loaders";
 import { style } from "./CardItem.style";
@@ -32,6 +32,14 @@ export class CardItem extends HTMLElement {
     this.shadow.innerHTML = this.render();
     styleLoader(this.shadow, style);
     this.renderImage();
+    const cardImage = this.shadow.getElementById(this.cardId);
+
+    cardImage.addEventListener("click", () => {
+      const cardZoomed = document.createElement("card-zoomed");
+      cardZoomed.setAttribute("card-id", this.cardId);
+      cardZoomed.setAttribute("card-image", this.cardImage);
+      document.body.append(cardZoomed);
+    });
   }
 
   renderImage() {

@@ -1,5 +1,6 @@
 import { Card } from "./components/Card";
 import { CardItem } from "./components/CardItem";
+import { CardZoomed } from "./components/CardZoomed";
 import { defineElement } from "./library/loaders";
 
 const components = [
@@ -10,6 +11,10 @@ const components = [
   {
     name: "card-item",
     component: CardItem
+  },
+  {
+    name: "card-zoomed",
+    component: CardZoomed
   },
 ];
 
