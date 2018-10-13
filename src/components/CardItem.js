@@ -1,7 +1,3 @@
-//TODO Add card zooming on click
-//TODO Add logic to search specific card
-//TODO Add pub/sub pattern
-
 import { styleLoader } from "../library/loaders";
 import { style } from "./CardItem.style";
 

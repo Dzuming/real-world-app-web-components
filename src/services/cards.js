@@ -4,6 +4,5 @@ export const getAllCards = params => {
   const getAllCards = API_URL;
   getAllCards.pathname = "v1/cards";
   getAllCards.search = new URLSearchParams(params);
-  console.log(getAllCards)
   return fetch(getAllCards).then(response => response.json());
 };

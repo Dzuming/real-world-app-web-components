@@ -34,7 +34,8 @@
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
-    "normalize.css": "^5.0.0"
+    "normalize.css": "^5.0.0",
+    "pubsub-js": "^1.7.0"
   },
   "engines": {
     "node": ">= 4.0.0",
